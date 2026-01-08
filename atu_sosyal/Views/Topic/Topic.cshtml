@@ -1,0 +1,141 @@
+﻿@using atu_sosyal.ViewModels
+@model TopicViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = Model.Title;
+}
+
+<div id="content-wrapper">
+    <div class="container mt-4">
+
+        <div class="row g-4">
+
+            <main class="col-lg-8">
+
+                <a class="text-decoration-none mb-3 d-block" style="color: var(--nv-text-secondary);" href="@Url.Action("Index", "Home")">
+                    <i class="bi bi-arrow-left"></i> Ana Sayfaya Dön
+                </a>
+
+                <div class="card shadow-sm rounded-0 mb-4">
+                    <div class="card-body p-4">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-warning text-dark rounded-0">@Model.Category</span>
+                            <small class="text-secondary">@Model.CreatedDate.ToString("dd MMMM yyyy HH:mm")</small>
+                        </div>
+
+                        <h1 class="fw-bold mb-3" style="color: var(--nv-text-primary);">
+                            @Model.Title
+                        </h1>
+
+                        <div class="d-flex align-items-center gap-2 mb-4 pb-3 border-bottom" style="border-color: var(--nv-border) !important;">
+                            <div class="profile-pic-sm bg-success rounded-circle d-flex justify-content-center align-items-center text-white fw-bold">
+                                @Model.user.Username.Substring(0, 1).ToUpper()
+                            </div>
+                            <span class="fw-bold" style="color: var(--nv-accent-green);">@Model.user.Username</span>
+                        </div>
+
+                        <div class="fs-5" style="line-height: 1.7; color: var(--nv-text-primary);">
+                            @Model.Content
+                        </div>
+
+                            <div class="mt-4 pt-3 border-top d-flex gap-2" style="border-color: var(--nv-border) !important;">
+                                <a href="@Url.Action("Edit", "Topic", new { id = Model.topicId })" class="btn btn-sm btn-outline-warning rounded-0">
+                                    <i class="bi bi-pencil"></i> Düzenle
+                                </a>
+
+
+
+                                <form asp-action="Delete" asp-controller="Topic" method="post" onsubmit="return confirm('Bu konuyu silmek istediğinize emin misiniz?');">
+                                    <input type="hidden" name="id" value="@Model.topicId" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-0">
+                                        <i class="bi bi-trash"></i> Sil
+                                    </button>
+                                </form>
+                            </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card shadow-sm rounded-0">
+                    <h5 class="card-header fw-bold bg-transparent border-bottom rounded-0 py-3" style="color: var(--nv-text-primary);">
+                        Yorumlar (@(Model.Comments?.Count ?? 0))
+                    </h5>
+                    <div class="card-body p-4">
+
+                        @if (Model.Comments != null && Model.Comments.Any())
+                        {
+                            <div class="d-flex flex-column gap-4">
+                                @foreach (var comment in Model.Comments.OrderBy(c => c.CreatedDate))
+                                {
+                                    <div class="d-flex gap-3">
+                                        <div class="profile-pic-sm bg-secondary rounded-circle d-flex justify-content-center align-items-center text-white flex-shrink-0" style="width:40px; height:40px;">
+                                            @comment.AuthorUsername.Substring(0, 1).ToUpper()
+                                        </div>
+
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <span class="fw-bold" style="color: var(--nv-accent-green);">@comment.AuthorUsername</span>
+                                                <small class="text-secondary">@comment.CreatedDate.ToString("dd.MM HH:mm")</small>
+                                            </div>
+                                            <div class="p-3 rounded-0" style="background-color: rgba(255,255,255,0.05);">
+                                                <p class="mb-0" style="color: var(--nv-text-primary);">@comment.Content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-dark rounded-0 text-center text-secondary border-0">
+                                Henüz yorum yapılmamış. İlk yorumu sen yap!
+                            </div>
+                        }
+
+
+
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="mt-5">
+                                <h6 class="fw-bold mb-3" style="color: var(--nv-text-secondary);">Bir Yorum Yaz</h6>
+                                <form asp-action="AddComment" asp-controller="Topic" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="topicId" value="@Model.topicId" />
+
+                                    <div class="mb-3">
+                                        <textarea name="content" class="form-control rounded-0" rows="3" placeholder="Düşüncelerini paylaş..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success rounded-0 px-4 fw-bold">GÖNDER</button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mt-4 text-center border-top pt-3" style="border-color: var(--nv-border) !important;">
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light rounded-0 btn-sm">
+                                    Yorum yapmak için giriş yapmalısınız
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+            </main>
+            <aside class="col-lg-4">
+                <div class="d-flex flex-column gap-4">
+
+                    <partial name="_EtkinlikWidget" />
+
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="container text-center mt-5 py-4 border-top" style="color: var(--nv-text-secondary); border-color: var(--nv-border) !important;">
+        <p class="mb-1">&copy; 2025 ATÜ SOSYAL</p>
+    </footer>
+</div>

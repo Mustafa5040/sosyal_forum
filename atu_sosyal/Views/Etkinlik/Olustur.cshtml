@@ -1,0 +1,64 @@
+﻿@model atu_sosyal.Models.Etkinlik
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Yeni Etkinlik";
+}
+
+<div id="content-wrapper">
+    <div class="container mt-5">
+
+        <a asp-action="Index" class="text-decoration-none mb-4 d-inline-block" style="color: var(--nv-text-secondary);">
+            <i class="bi bi-arrow-left"></i> Listeye Dön
+        </a>
+
+        <div class="card rounded-0 shadow-sm" style="background-color: var(--nv-bg-card); border: 1px solid var(--nv-border);">
+
+            <div class="card-header rounded-0 py-3" style="background-color: transparent; border-bottom: 1px solid var(--nv-border);">
+                <h4 class="mb-0 fw-bold" style="color: var(--nv-accent-green);">
+                    YENİ ETKİNLİK PLANLA
+                </h4>
+            </div>
+
+            <div class="card-body p-4">
+                <form asp-action="Olustur" method="post">
+
+                    <div class="mb-4">
+                        <label asp-for="Baslik" class="form-label" style="color: var(--nv-text-primary);">Etkinlik Başlığı</label>
+                        <input asp-for="Baslik" class="form-control form-control-lg rounded-0" placeholder="Örn: Java Spring Boot Workshop" />
+                        <span asp-validation-for="Baslik" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label asp-for="Konum" class="form-label" style="color: var(--nv-text-primary);">Konum</label>
+                            <input asp-for="Konum" class="form-control rounded-0" />
+                            <span asp-validation-for="Konum" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label asp-for="Kontenjan" class="form-label" style="color: var(--nv-text-primary);">Kontenjan</label>
+                            <input asp-for="Kontenjan" type="number" class="form-control rounded-0" />
+                            <span asp-validation-for="Kontenjan" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Tarih" class="form-label" style="color: var(--nv-text-primary);">Tarih</label>
+                        <input asp-for="Tarih" type="datetime-local" class="form-control rounded-0" />
+                        <span asp-validation-for="Tarih" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-2">
+                        <button type="submit" class="btn btn-success rounded-0 py-3 fw-bold text-uppercase">
+                            Yayınla
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <partial name="_SonEtkinlikPartial" />
+        </div>
+    </div>
+</div>

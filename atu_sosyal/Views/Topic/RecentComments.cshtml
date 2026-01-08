@@ -1,0 +1,78 @@
+﻿@using atu_sosyal.ViewModels
+@model List<RecentCommentViewModel>
+
+@{
+    ViewData["Title"] = "Son Yapılan Yorumlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content-wrapper">
+    <div class="container mt-5">
+
+        <h3 class="mb-4 fw-light border-bottom pb-2">Son Yapılan Yorumlar</h3>
+
+        <div class="card shadow-sm rounded-0">
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0 align-middle">
+
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col" style="width: 40%">Yorum İçeriği</th>
+                                <th scope="col" style="width: 25%">Konu Başlığı</th>
+                                <th scope="col">Yazar</th>
+                                <th scope="col">Tarih</th>
+                                <th scope="col" class="text-end">İşlem</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="text-info" style="max-width: 350px;" title="@item.Content">
+                                                @item.Content
+                                            </div>
+                                        </td>
+
+                                        <td class="fw-bold text-primary">
+                                            @item.TopicTitle
+                                        </td>
+
+                                        <td>
+                                            <span class="badge bg-secondary rounded-0">@item.AuthorUsername</span>
+                                        </td>
+
+                                        <td class="text-secondary small">
+                                            @item.CreatedDate.ToString("dd.MM.yyyy HH:mm")
+                                        </td>
+
+                                        <td class="text-end">
+                                            <a asp-controller="Topic" asp-action="Topic" asp-route-topicId="@item.TopicId"
+                                               class="btn btn-sm btn-success">
+                                                Konuya Git <i class="bi bi-arrow-right"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center py-5 text-muted">
+                                        <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                        Henüz hiç yorum yapılmamış.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

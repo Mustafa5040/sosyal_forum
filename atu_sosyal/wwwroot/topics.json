@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "Ubuntu kurulumunda Bitlocker hatası",
+    "category": "Linux",
+    "badge_class": "bg-warning text-dark",
+    "timestamp": "10.38",
+    "author": "Yusuf İpek",
+    "author_image": "logo.png",
+    "body": "Arkadaşlar selam ubuntu kurulumunda sürekli bitlockerı kaldırın diyor, ne yapmalıyım?",
+    "likes": 12,
+    "comments": [
+      {
+        "author": "Ahmet Yılmaz",
+        "timestamp": "11.00",
+        "text": "Windows'tan bitlocker şifresini çözmeyi deneyebilir misin?"
+      },
+      {
+        "author": "Elif Kara",
+        "timestamp": "11.15",
+        "text": "Windows'tan yapman lazım diye biliyorum.."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Windows güncelleme hatası",
+    "category": "Windows",
+    "badge_class": "bg-light text-dark",
+    "timestamp": "09.15",
+    "author": "Ayşe Demir",
+    "author_image": "logo.png",
+    "body": "Windows 11'e güncellerken sürekli 0x800f081f hatası alıyorum. Çözümünü bilen var mı?",
+    "likes": 5,
+    "comments": [
+      {
+        "author": "Mahmut Şaşmaz",
+        "timestamp": "17.40",
+        "text": "Windows'u sil direkt linux kur!."
+      },
+      {
+        "author": "Yasemin Çelik",
+        "timestamp": "11.45",
+        "text": "Hizmetlerden window update'i kontrol et çalışıyor mu diye."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Linux dosya sistemi sorunu",
+    "category": "Linux",
+    "badge_class": "bg-warning text-dark",
+    "timestamp": "11.20",
+    "author": "Mehmet Can",
+    "author_image": "logo.png",
+    "body": "Dosya sistemim 'read-only' oldu, hiçbir şey yazamıyorum. Nasıl düzeltirim?",
+    "likes": 8,
+    "comments": []
+  },
+  {
+    "id": 4,
+    "title": "Python pip3 opencv yüklemiyor",
+    "category": "Python",
+    "badge_class": "bg-success text-white",
+    "timestamp": "11.25",
+    "author": "Faruk Işın",
+    "author_image": "logo.png",
+    "body": "pip3 install opencv-python dediğimde 'could not find a version' hatası alıyorum.",
+    "likes": 3,
+      "comments": [
+      {
+        "author": "Mahmut Şaşmaz",
+        "timestamp": "17.40",
+        "text": "UV kullan pip kullanan mı kaldı ya!."
+      },
+      {
+        "author": "Yasemin Çelik",
+        "timestamp": "11.45",
+        "text": "UV kullan diyenler boş ver ben araştırıp dönüş yapacağım."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Gnome Extensions: Özelleştirme Cenneti",
+    "category": "Linux",
+    "badge_class": "bg-warning text-dark",
+    "timestamp": "12.52",
+    "author": "Sevinç Mutlu",
+    "author_image": "logo.png",
+    "body": "Gnome Extentions bayağı iyi.",
+    "likes": 21,
+    "comments": [
+      {
+        "author": "Ahmet Yılmaz",
+        "timestamp": "11.00",
+        "text": "Bence kötü."
+      },
+      {
+        "author": "Elif Kara",
+        "timestamp": "11.15",
+        "text": "Bence orta."
+      }
+    ]
+  }
+]

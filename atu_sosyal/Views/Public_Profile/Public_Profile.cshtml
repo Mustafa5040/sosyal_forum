@@ -1,0 +1,163 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Profilim";
+}
+
+<!doctype html>
+<html lang="tr" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profilim | ATÜ Sosyal</title>
+    <link rel="icon" type="image/x-icon" href="@Url.Content("~/images/favicon.ico")">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/atu_style.css" media="screen" />
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark'; 
+            document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+
+<div id="content-wrapper">
+    <div class="container profile-meta py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <img src="@Url.Content("~/images/logo.png")" class="avatar" id="avatarImg" alt="Profil Avatarı" />
+                        </div>
+                        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                            <div class="mb-3 mb-md-0">
+                                <h2 class="mb-1">
+                                    <span id="displayFullname">Yükleniyor...</span>
+                                    <span class="badge bg-secondary align-middle fs-6">><span id="displayUsername">...</span></span>
+                                </h2>
+                                <div style="color: var(--nv-text-secondary);">Endüstri Müh. • Linux, Web, Veri • ATÜ</div>
+                                <div class="mt-2">
+                                    <span class="badge bg-warning text-dark">Linux</span>
+                                    <span class="badge bg-success">Bootstrap</span>
+                                </div>
+                            </div>
+                            <div class="profile-actions text-nowrap">
+                                <button class="btn btn-outline-light me-2" id="btnPreview">
+                                    <i class="bi bi-eye"></i> Önizleme
+                                </button>
+                                <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#bioModal">
+                                    <i class="bi bi-pencil"></i> Düzenle
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr style="border-color: var(--nv-border) !important;">
+
+                        <div class="row text-center">
+                            <div class="col-4 stat">
+                                <div class="num" id="statPosts">24</div>
+                                <div class="small" style="color: var(--nv-text-secondary);">Gönderi</div>
+                            </div>
+                            <div class="col-4 stat">
+                                <div class="num" id="statFollowers">128</div>
+                                <div class="small" style="color: var(--nv-text-secondary);">Takipçi</div>
+                            </div>
+                            <div class="col-4 stat">
+                                <div class="num" id="statFollowing">72</div>
+                                <div class="small" style="color: var(--nv-text-secondary);">Takip</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mt-3 profile-tabs-container"> 
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="profileTabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#posts">
+                                    <i class="bi bi-grid-3x3"></i> Gönderiler 
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#about">
+                                    <i class="bi bi-person-badge"></i> Hakkında
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#settings">
+                                    <i class="bi bi-gear"></i> Ayarlar
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-body tab-content p-4">
+                        <div class="tab-pane fade show active" id="posts">
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <h5 class="mb-3">Son Mesajlar</h5>
+                                    <div id="recentMessages"></div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <h5 class="mb-3">Son Açılan Konular</h5>
+                                    <div id="recentTopics"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="about">
+                            <h5>Hakkımda</h5>
+                            <p id="bioText">ATÜ Endüstri Mühendisliği öğrencisi. Linux meraklısı, veri ve web projeleri ile uğraşıyor.</p>
+                            <button class="btn btn-sm btn-outline-light">
+                                <i class="bi bi-pencil"></i> Düzenle
+                            </button>
+                        </div>
+
+                        <div class="tab-pane fade" id="settings">
+                            <form id="settingsForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="fullname" class="form-label">Ad Soyad</label>
+                                        <input type="text" class="form-control" id="fullname" value="Yükleniyor..." required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="username" class="form-label">Kullanıcı Adı</label>
+                                        <input type="text" class="form-control" id="username" value="..." required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Kaydet</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="container text-center mt-5 py-4 border-top" style="color: var(--nv-text-secondary); border-color: var(--nv-border) !important;">
+        <p class="mb-1">&copy; 2025 ATÜ SOSYAL</p>
+    </footer>
+</div>
+
+<script src="~/js/login_guard.js"></script>
+<script src="~/js/public_profile.js"></script>
+<script src="~/js/logout.js"></script>
+
+<script>
+    const loggedUsername = localStorage.getItem('loggedUsername');
+    if (loggedUsername) {
+        const userSpanBottom = document.getElementById('usernameSpanBottom');
+        if(userSpanBottom) userSpanBottom.textContent = loggedUsername;
+    }
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            localStorage.removeItem('loggedUsername');
+            window.location.href = '@Url.Action("Login_Signup","Home")';
+        });
+    }
+</script>
+</body>
+</html>

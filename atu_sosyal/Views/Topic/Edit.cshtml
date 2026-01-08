@@ -1,0 +1,44 @@
+﻿@model atu_sosyal.Models.Topic
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Konuyu Düzenle";
+}
+
+<div id="content-wrapper">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm rounded-0">
+                    <div class="card-header bg-transparent border-bottom rounded-0 py-3">
+                        <h4 class="mb-0 fw-bold text-warning">KONUYU DÜZENLE</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-action="Edit" method="post">
+                            <input type="hidden" asp-for="topicId" />
+
+                            <div class="mb-3">
+                                <label asp-for="Title" class="form-label">Başlık</label>
+                                <input asp-for="Title" class="form-control rounded-0" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Category" class="form-label">Kategori</label>
+                                <input asp-for="Category" class="form-control rounded-0" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Content" class="form-label">İçerik</label>
+                                <textarea asp-for="Content" class="form-control rounded-0" rows="8"></textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Topic" asp-route-id="@Model.topicId" class="btn btn-secondary rounded-0">İptal</a>
+                                <button type="submit" class="btn btn-success rounded-0 px-4">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

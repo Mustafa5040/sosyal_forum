@@ -1,0 +1,50 @@
+﻿@model List<atu_sosyal.Models.Etkinlik>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Etkinlik Takvimi";
+}
+
+<div id="content-wrapper">
+    <div class="container mt-4">
+
+        <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-2" style="border-color: var(--nv-border) !important;">
+            <h1 class="fw-light mb-0">ETKİNLİK TAKVİMİ</h1>
+
+            <a asp-action="Olustur" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Yeni Etkinlik
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-topic h-100">
+                        <div class="card-body">
+                            <span class="badge bg-warning mb-2">@item.Tarih.ToString("dd MMMM HH:mm")</span>
+
+                            <h5 class="card-title mb-2">
+                                <a href="#" class="stretched-link fw-bold">@item.Baslik</a>
+                            </h5>
+
+                            <p class="card-text mb-3" style="color: var(--nv-text-secondary);">
+                                <i class="bi bi-geo-alt me-1" style="color: var(--nv-accent-green);"></i> @item.Konum
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between mt-auto border-top pt-3" style="border-color: var(--nv-border) !important;">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="profile-pic-sm bg-secondary d-flex align-items-center justify-content-center text-white fw-bold">
+                                        A
+                                    </div>
+                                    <span class="small fw-bold" style="color: var(--nv-text-primary);">Organizatör</span>
+                                </div>
+                                <span class="small" style="color: var(--nv-accent-green);">@item.Kontenjan / 100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
